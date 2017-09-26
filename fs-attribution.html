@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../paper-input/paper-textarea.html">
 <link rel="import" href="../fs-contributor/fs-contributor.html">
 
 <dom-module id="fs-attribution">
@@ -12,7 +13,16 @@
         display: inline-block;
       }
     </style>
-    <div>
+    <div hidden$="{{_hideReason(edit, attribution.changeMessage)}}">
+      <div>Reason This Information Is Correct</div>
+      <paper-textarea 
+        hidden$="[[!edit]]"
+        label="Reason"
+        no-label-float
+        value="{{attribution.changeMessage}}"></paper-textarea>
+      <div hidden$="[[edit]]">{{attribution.changeMessage}}</div>
+    </div>
+    <div hidden$="[[edit]]">
       Last modified <span>{{_readableDate(attribution.modified)}}</span> by
       <fs-contributor contributor-id="[[attribution.contributor.resourceId]]"></fs-contributor>
     </div>
@@ -31,7 +41,13 @@
       static get is() { return 'fs-attribution'; }
       static get properties() {
         return {
-          attribution: Object
+          attribution: Object,
+          
+          /** Whether in edit mode; only affects the reason */
+          edit: {
+            type: Boolean,
+            value: false
+          }
         };
       }
       
@@ -43,6 +59,10 @@
             day: 'numeric'
           }).format(new Date(timestamp));
         }
+      }
+      
+      _hideReason(edit, changeMessage) {
+        return !(edit || (changeMessage && changeMessage.trim().length));
       }
     }
 
