@@ -5,10 +5,6 @@
 <dom-module id="fs-attribution">
   <template>
     <style>
-      :host {
-        display: block;
-      }
-      
       fs-contributor {
         display: inline-block;
       }
@@ -22,7 +18,7 @@
         value="{{attribution.changeMessage}}"></paper-textarea>
       <div hidden$="[[edit]]">{{attribution.changeMessage}}</div>
     </div>
-    <div hidden$="[[edit]]">
+    <div>
       Last modified <span>{{_readableDate(attribution.modified)}}</span> by
       <fs-contributor contributor-id="[[attribution.contributor.resourceId]]"></fs-contributor>
     </div>
