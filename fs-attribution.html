@@ -1,0 +1,51 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../fs-contributor/fs-contributor.html">
+
+<dom-module id="fs-attribution">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      
+      fs-contributor {
+        display: inline-block;
+      }
+    </style>
+    <div>
+      Last modified <span>{{_readableDate(attribution.modified)}}</span> by
+      <fs-contributor contributor-id="[[attribution.contributor.resourceId]]"></fs-contributor>
+    </div>
+  </template>
+
+  <script>
+    /**
+     * `fs-attribution`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class FsAttribution extends Polymer.Element {
+      static get is() { return 'fs-attribution'; }
+      static get properties() {
+        return {
+          attribution: Object
+        };
+      }
+      
+      _readableDate(timestamp) {
+        if(timestamp) {
+          return new Intl.DateTimeFormat('en-GB', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          }).format(new Date(timestamp));
+        }
+      }
+    }
+
+    window.customElements.define(FsAttribution.is, FsAttribution);
+  </script>
+</dom-module>
