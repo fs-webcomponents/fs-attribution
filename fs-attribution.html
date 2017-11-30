@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../paper-input/paper-textarea.html">
+<link rel="import" href="../fs-api-aware/fs-api-aware.html">
 <link rel="import" href="../fs-contributor/fs-contributor.html">
 
 <dom-module id="fs-attribution">
@@ -20,7 +21,9 @@
     </div>
     <div>
       Last modified <span>{{_readableDate(attribution.modified)}}</span> by
-      <fs-contributor contributor-id="[[attribution.contributor.resourceId]]"></fs-contributor>
+      <fs-contributor
+        client-name="[[clientName]]"
+        contributor-id="[[attribution.contributor.resourceId]]"></fs-contributor>
     </div>
   </template>
 
@@ -33,7 +36,7 @@
      * @polymer
      * @demo demo/index.html
      */
-    class FsAttribution extends Polymer.Element {
+    class FsAttribution extends FSApiAwareMixin(Polymer.Element) {
       static get is() { return 'fs-attribution'; }
       static get properties() {
         return {
