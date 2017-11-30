@@ -1,7 +1,7 @@
 {
   "name": "fs-attribution",
   "main": "fs-attribution.html",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
     "fs-contributor": "fs-webcomponents/fs-contributor#^4.0.0",
